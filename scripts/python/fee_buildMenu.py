@@ -1,34 +1,36 @@
-
 import hou
 
 
-
 def strisDetail(argString):
-    if argString.find('detail')==0 or argString.find('global')==0:
+    if argString.find('detail') == 0 or argString.find('global') == 0:
         return True
     else:
         return False
+
 
 def strisPrim(argString):
-    if argString.find('prim')==0:
+    if argString.find('prim') == 0:
         return True
     else:
         return False
+
 
 def strisPoint(argString):
-    if argString.find('point')==0:
+    if argString.find('point') == 0:
         return True
     else:
         return False
+
 
 def strisEdge(argString):
-    if argString.find('edge')==0:
+    if argString.find('edge') == 0:
         return True
     else:
         return False
 
+
 def strisVertex(argString):
-    if argString.find('vertex')==0 or argString=='vertices':
+    if argString.find('vertex') == 0 or argString == 'vertices':
         return True
     else:
         return False
@@ -48,20 +50,20 @@ def buildAttribsMenu_sub(node, input_num=0, attribClass='point', attribType='all
             allAttribs = geo.globalAttribs()
         menu = []
         for attrib in allAttribs:
-            if attribType=='int':
-                if attrib.dataType()!=hou.attribData.Int:
+            if attribType == 'int':
+                if attrib.dataType() != hou.attribData.Int:
                     continue
-            elif attribType=='float':
-                if attrib.dataType()!=hou.attribData.Float:
+            elif attribType == 'float':
+                if attrib.dataType() != hou.attribData.Float:
                     continue
-            elif attribType=='string':
-                if attrib.dataType()!=hou.attribData.String:
+            elif attribType == 'string':
+                if attrib.dataType() != hou.attribData.String:
                     continue
             menu += [attrib.name()]
             menu += [attrib.name()]
     except:
         return []
-    
+
     return menu
 
 
@@ -72,7 +74,7 @@ def buildMultiClassAttribsMenu(node, input_num=0, attribClasses=['point'], attri
             menu += buildAttribsMenu_sub(node, input_num, attribClass, attribType)
         except:
             continue
-    
+
     return menu
 
 
@@ -83,11 +85,8 @@ def buildAttribsMenu(node, input_num=0, attribClass='point', attribType='all'):
         return buildAttribsMenu_sub(node, input_num, attribClass, attribType)
 
 
-
 def buildAllClassAttribsMenu(node, input_num=0, attribType='all'):
     return buildMultiClassAttribsMenu(node, input_num, ['detail', 'prim', 'point', 'vertex'], attribType)
-
-
 
 
 def buildGroupsMenu_sub(node, input_num=0, groupClass='point'):
@@ -110,7 +109,7 @@ def buildGroupsMenu_sub(node, input_num=0, groupClass='point'):
             menu += [group.name()]
     except:
         return []
-    
+
     return menu
 
 
@@ -121,9 +120,8 @@ def buildMultiClassGroupsMenu(node, input_num=0, groupClasses=['point']):
             menu += buildGroupsMenu_sub(node, input_num, groupClass)
         except:
             continue
-    
-    return menu
 
+    return menu
 
 
 def buildGroupsMenu(node, input_num=0, groupClass='point'):
@@ -133,7 +131,5 @@ def buildGroupsMenu(node, input_num=0, groupClass='point'):
         return buildGroupsMenu_sub(node, input_num, groupClass)
 
 
-
 def buildAllClassGroupsMenu(node, input_num=0):
     return buildMultiClassGroupsMenu(node, input_num, ['detail', 'prim', 'point', 'edge', 'vertex'])
-

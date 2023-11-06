@@ -1,7 +1,7 @@
-
 # import fee_Math
 # from importlib import reload
 # reload(fee_Math)
+
 
 def isNumber(strInput):
     try:
@@ -25,7 +25,6 @@ def valueType(strInput):
     return 2
 
 
-
 def findValueByKey(arg, key):
     if not isinstance(key, str):
         raise TypeError('key is not string')
@@ -39,10 +38,8 @@ def findValueByKey(arg, key):
             else:
                 resultValues.extend(findValueByKey(arg[subkey], key))
 
-    
     if isinstance(arg, list) or isinstance(arg, tuple):
         for subelem in arg:
             resultValues.extend(findValueByKey(subelem, key))
 
     return resultValues
- 

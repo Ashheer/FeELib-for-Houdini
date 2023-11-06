@@ -1,18 +1,22 @@
 # This Python file uses the following encoding: utf-8
-from __future__ import print_function
+# from __future__ import print_function
 
 import hou
 import os
 import PySide2
 
+
 # import fee_Utils
 # from importlib import reload
 # reload(fee_Utils)
 
+
 def displayConfirmation(prevText='', postText=''):
-    sureToRunThis = hou.ui.displayConfirmation(prevText + '\n\nAre you sure you wantS to run this\n你是否确定要运行这个工具\n\n' + postText)
+    sureToRunThis = hou.ui.displayConfirmation(
+        prevText + '\n\nAre you sure you wantS to run this\n你是否确定要运行这个工具\n\n' + postText)
     if not sureToRunThis:
         raise SystemExit('Stop Run', sureToRunThis)
+
 
 def readTXTAsList(outList, txt):
     for line in txt.readlines():
@@ -25,18 +29,12 @@ def readTXTAsList(outList, txt):
 def isFloat(inputString):
     if not isinstance(inputString, str):
         raise ValueError()
-    
+
     try:
         returnVal = float(inputString)
         return True
     except:
         return False
-    return None
-
-
-
-
-
 
 
 def setClipboardText(text):
@@ -56,10 +54,12 @@ def createAndRunBat(command, batPath):
         BAT.write(command)
     os.system(batPath)
 
+
 def createAndRunBat_HoudiniTEMP(command, batName):
     TEMP_path = hou.getenv('TEMP')
     batPath = TEMP_path + '/' + batName
     createAndRunBat(command, batPath)
+
 
 def getAbsPath(path):
     if not isinstance(path, str):
@@ -73,8 +73,7 @@ def getAbsPath(path):
     return os.path.abspath(path).replace('\\', '/')
 
 
-
-def gitPullByBat(repositoryPath, reloadAllFiles = False, echoOff = True):
+def gitPullByBat(repositoryPath, reloadAllFiles=False, echoOff=True):
     absRepositoryPath = getAbsPath(repositoryPath)
 
     command = repositoryPath[:2]
@@ -83,13 +82,13 @@ def gitPullByBat(repositoryPath, reloadAllFiles = False, echoOff = True):
     if not echoOff:
         command += '\n' + 'pause'
 
-    #print(command)
+    # print(command)
 
     createAndRunBat_HoudiniTEMP(command, 'feE_Utils_GitPull.bat')
 
     if reloadAllFiles:
-        hou.hda.reloadAllFiles(rescan = True)
-        #hou.hda.reloadNamespaceOrder()
+        hou.hda.reloadAllFiles(rescan=True)
+        # hou.hda.reloadNamespaceOrder()
 
     '''
     try:
@@ -99,12 +98,13 @@ def gitPullByBat(repositoryPath, reloadAllFiles = False, echoOff = True):
     except:
         pass
     '''
-    #os.system('D:/Houdini/FeEProjectHoudini/otls/gitpull.bat')
-    #os.system('D:; cd D:/Git/houdini_toolkit; git pull')
+    # os.system('D:/Houdini/FeEProjectHoudini/otls/gitpull.bat')
+    # os.system('D:; cd D:/Git/houdini_toolkit; git pull')
+
 
 def gitPushByBat(repositoryPath):
     absRepositoryPath = getAbsPath(repositoryPath)
-    #print(absRepositoryPath)
+    # print(absRepositoryPath)
 
     command = absRepositoryPath[:2] + '\n'
     command += 'cd ' + absRepositoryPath + '\n'
@@ -124,14 +124,13 @@ git status
 :: pause
 git push
     '''
-    #print(command)
+    # print(command)
     createAndRunBat_HoudiniTEMP(command, 'feE_Utils_GitPush.bat')
 
     # if reloadAllFiles:
     #     hou.hda.reloadAllFiles(rescan = True)
     #     #hou.hda.reloadNamespaceOrder()
 
-    
     # import subprocess
 
     # os.chdir('D:/Houdini/FeEProjectHoudini/otls/')
@@ -142,4 +141,3 @@ git push
     #     curline = p.stdout.readline()
     # p.wait()
     # print(p.returncode)
-
