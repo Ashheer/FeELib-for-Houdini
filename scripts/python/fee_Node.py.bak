@@ -1761,7 +1761,7 @@ def convertDefiByFilter(selectedNode, targetHDAPath = '',
                         flag = True
                 # if flag:
                 #     print(defaultValue)
-                defaultValueList[idx] = defaultValue
+                defaultValuelist[idx] = defaultValue
             
             if flag:
                 defaultValueTuple = tuple(defaultValueList)

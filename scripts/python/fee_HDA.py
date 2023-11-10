@@ -1,7 +1,7 @@
 # This Python file uses the following encoding: utf-8
 import hou
 import os
-import fee_Utils
+import fee_Utils as fee_Utils
 
 
 # from importlib import reload

@@ -38,8 +38,8 @@ def strisVertex(argString):
 
 def buildAttribsMenu_sub(node, input_num=0, attribClass='point', attribType='all'):
     try:
-        input = node.inputs()[input_num]
-        geo = input.geometry()
+        input_node = node.inputs()[input_num]
+        geo = input_node.geometry()
         if strisPrim(attribClass):
             allAttribs = geo.primAttribs()
         elif strisPoint(attribClass):
@@ -67,7 +67,7 @@ def buildAttribsMenu_sub(node, input_num=0, attribClass='point', attribType='all
     return menu
 
 
-def buildMultiClassAttribsMenu(node, input_num=0, attribClasses=['point'], attribType='all'):
+def buildMultiClassAttribsMenu(node, input_num=0, attribClasses: tuple[str] = ('point'), attribType='all'):
     menu = []
     for attribClass in attribClasses:
         try:
@@ -78,7 +78,7 @@ def buildMultiClassAttribsMenu(node, input_num=0, attribClasses=['point'], attri
     return menu
 
 
-def buildAttribsMenu(node, input_num=0, attribClass='point', attribType='all'):
+def buildAttribsMenu(node, input_num: int = 0, attribClass='point', attribType: str ='all'):
     if isinstance(attribClass, list) or isinstance(attribClass, tuple):
         return buildMultiClassAttribsMenu(node, input_num, attribClass, attribType)
     else:
@@ -86,13 +86,13 @@ def buildAttribsMenu(node, input_num=0, attribClass='point', attribType='all'):
 
 
 def buildAllClassAttribsMenu(node, input_num=0, attribType='all'):
-    return buildMultiClassAttribsMenu(node, input_num, ['detail', 'prim', 'point', 'vertex'], attribType)
+    return buildMultiClassAttribsMenu(node, input_num, ('detail', 'prim', 'point', 'vertex'), attribType)
 
 
-def buildGroupsMenu_sub(node, input_num=0, groupClass='point'):
+def buildGroupsMenu_sub(node: hou.Node, input_num: int = 0, groupClass: str = 'point'):
     try:
-        input = node.inputs()[input_num]
-        geo = input.geometry()
+        input_node = node.inputs()[input_num]
+        geo = input_node.geometry()
         if strisPrim(groupClass):
             allGroups = geo.primGroups()
         elif strisPoint(groupClass):
@@ -113,7 +113,7 @@ def buildGroupsMenu_sub(node, input_num=0, groupClass='point'):
     return menu
 
 
-def buildMultiClassGroupsMenu(node, input_num=0, groupClasses=['point']):
+def buildMultiClassGroupsMenu(node: hou.Node, input_num: int = 0, groupClasses=('point')):
     menu = []
     for groupClass in groupClasses:
         try:
@@ -124,12 +124,12 @@ def buildMultiClassGroupsMenu(node, input_num=0, groupClasses=['point']):
     return menu
 
 
-def buildGroupsMenu(node, input_num=0, groupClass='point'):
+def buildGroupsMenu(node: hou.Node, input_num: int = 0, groupClass='point'):
     if isinstance(groupClass, list) or isinstance(groupClass, tuple):
         return buildMultiClassGroupsMenu(node, input_num, groupClass)
     else:
         return buildGroupsMenu_sub(node, input_num, groupClass)
 
 
-def buildAllClassGroupsMenu(node, input_num=0):
-    return buildMultiClassGroupsMenu(node, input_num, ['detail', 'prim', 'point', 'edge', 'vertex'])
+def buildAllClassGroupsMenu(node: hou.Node, input_num: int = 0):
+    return buildMultiClassGroupsMenu(node, input_num, ('detail', 'prim', 'point', 'edge', 'vertex'))

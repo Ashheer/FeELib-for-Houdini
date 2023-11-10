@@ -89,7 +89,7 @@ def changeNodeType_keepIO(node, targetNodeType, keep_parms=True):
     if not isinstance(targetNodeType, str):
         raise TypeError('targetNodeType must be string', targetNodeType)
 
-    ##### 记录flag情况
+    # 记录flag情况
     parent = node.parent()
     # print(parent.childTypeCategory().name())
     if parent.childTypeCategory().name() != 'Sop':
@@ -2095,7 +2095,7 @@ def convertDefiByFilter(selectedNode, targetHDAPath='',
                         flag = True
                 # if flag:
                 #     print(defaultValue)
-                defaultValueList[idx] = defaultValue
+                defaultValuelist[idx] = defaultValue
 
             if flag:
                 defaultValueTuple = tuple(defaultValueList)
